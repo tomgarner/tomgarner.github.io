@@ -27,12 +27,22 @@ const quotes = [
         author: "Shaolin WuDe (Virtues)"
     }
 ];
-  
-window.onload = function () {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const selected = quotes[randomIndex];
-    
-    document.getElementById('quote').textContent = `"${selected.quote}"`;
-    document.getElementById('author').textContent = `- ${selected.author}`;
+
+const displayRandomQuote = () => {
+    const previousIndex = $('.quote-container').data('selectedIndex') ?? Math.floor(Math.random() * quotes.length);
+    let selectedIndex = previousIndex + 1;
+
+    if (selectedIndex >= quotes.length) {
+        selectedIndex = 0;
+    }
+
+    const selected = quotes[selectedIndex];
+    $('#quote').text(`"${selected.quote}"`);
+    $('#author').text(`- ${selected.author}`);
+    $('.quote-container').data('selectedIndex', selectedIndex);
 };
-  
+
+$(document).ready(function() {
+    displayRandomQuote();
+    $('.quote-container').on('click', () => displayRandomQuote());
+});

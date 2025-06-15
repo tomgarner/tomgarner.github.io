@@ -12,6 +12,7 @@ body {
   .quote-container {
     text-align: center;
     padding: 20px;
+    cursor: pointer;
   }
   
   .quote-text {
